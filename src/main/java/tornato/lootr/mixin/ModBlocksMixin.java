@@ -13,7 +13,7 @@ import tornato.lootr.LootrPolymer;
 
 @Mixin(ModBlocks.class)
 public class ModBlocksMixin {
-    @ModifyArg(method = "registerBlocks", at = @At(value = "INVOKE", target = "Lnet/minecraft/registry/Registry;register(Lnet/minecraft/registry/Registry;Lnet/minecraft/util/Identifier;Ljava/lang/Object;)Ljava/lang/Object;"), index = 2, remap = false)
+    @ModifyArg(method = "registerBlocks", at = @At(value = "INVOKE", target = "Lnet/minecraft/registry/Registry;register(Lnet/minecraft/registry/Registry;Lnet/minecraft/util/Identifier;Ljava/lang/Object;)Ljava/lang/Object;"), index = 2)
     private static Object registerPolymerBlocks(Object entry) {
         PolymerBlockUtils.registerOverlay((Block) entry, (state, context) ->
                 LootrPolymer.BLOCKS.getOrDefault(entry, Blocks.STRUCTURE_BLOCK).getStateWithProperties(state)

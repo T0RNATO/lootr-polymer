@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 
 @Mixin(ModBlockEntities.class)
 public class ModBlockEntitiesMixin {
-    @ModifyArg(method = "registerBlockEntities", at = @At(value = "INVOKE", target = "Lnet/minecraft/registry/Registry;register(Lnet/minecraft/registry/Registry;Lnet/minecraft/util/Identifier;Ljava/lang/Object;)Ljava/lang/Object;"), index = 2, remap = false)
+    @ModifyArg(method = "registerBlockEntities", at = @At(value = "INVOKE", target = "Lnet/minecraft/registry/Registry;register(Lnet/minecraft/registry/Registry;Lnet/minecraft/util/Identifier;Ljava/lang/Object;)Ljava/lang/Object;"), index = 2)
     private static Object registerPolymerBlockEntities(Object entry) {
         PolymerBlockUtils.registerBlockEntity((BlockEntityType<?>) entry, (object, context) -> BlockEntityType.BARREL);
         return entry;

@@ -21,7 +21,6 @@
         "fabricloader": ">=${loader_version}",
         "fabric": "*",
         "minecraft": "*",
-        "polymer": "*",
         "lootr": "*"
     }
 }

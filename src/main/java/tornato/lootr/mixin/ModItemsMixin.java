@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 
 @Mixin(ModItems.class)
 public class ModItemsMixin {
-    @ModifyArg(method = "registerItems", at = @At(value = "INVOKE", target = "Lnet/minecraft/registry/Registry;register(Lnet/minecraft/registry/Registry;Lnet/minecraft/util/Identifier;Ljava/lang/Object;)Ljava/lang/Object;"), index = 2, remap = false)
+    @ModifyArg(method = "registerItems", at = @At(value = "INVOKE", target = "Lnet/minecraft/registry/Registry;register(Lnet/minecraft/registry/Registry;Lnet/minecraft/util/Identifier;Ljava/lang/Object;)Ljava/lang/Object;"), index = 2)
     private static Object registerPolymerItems(Object entry) {
         PolymerItemUtils.registerOverlay((Item) entry, (stack, context) -> Items.BARRIER);
         return entry;

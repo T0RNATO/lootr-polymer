@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 
 @Mixin(ModEntities.class)
 public class ModEntitiesMixin {
-    @ModifyArg(method = "registerEntities", at = @At(value = "INVOKE", target = "Lnet/minecraft/registry/Registry;register(Lnet/minecraft/registry/Registry;Lnet/minecraft/util/Identifier;Ljava/lang/Object;)Ljava/lang/Object;"), index = 2, remap = false)
+    @ModifyArg(method = "registerEntities", at = @At(value = "INVOKE", target = "Lnet/minecraft/registry/Registry;register(Lnet/minecraft/registry/Registry;Lnet/minecraft/util/Identifier;Ljava/lang/Object;)Ljava/lang/Object;"), index = 2)
     private static Object registerPolymerEntities(Object entry) {
         //noinspection unchecked
         PolymerEntityUtils.registerOverlay((EntityType<LootrChestMinecartEntity>) entry, entity -> context -> EntityType.CHEST_MINECART);
