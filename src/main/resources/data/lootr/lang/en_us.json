@@ -1,0 +1,18 @@
+{
+    "entity.lootr.lootr_minecart": "Minecart with Loot Chest",
+    "lootr.message.cannot_break": "Loot containers and carts cannot be broken.",
+    "lootr.message.cannot_break_sneak": "Loot containers and carts can only be broken while sneaking in creative mode.",
+    "lootr.message.cart_should_sneak": "Breaking the cart will delete your unique loot and items! In order to break, you must sneak while attacking",
+    "lootr.message.cart_should_sneak3": "per-player per-cart",
+    "lootr.message.decay_in": "This container will decay completely in %s seconds.",
+    "lootr.message.decay_start": "The container begins to crumble at your touch! It will decay completely in %s seconds.",
+    "lootr.message.decayed": "The decaying container crumbles at your touch!",
+    "lootr.message.invalid_block": "The container that you have tried to open is invalid as it has not generated its identifier.",
+    "lootr.message.invalid_table": "Error with mod [%s]! The loot table for this container [%s] could not be found and loot was not generated. Please check your `latest.log` for loading errors.",
+    "lootr.message.refresh_in": "This container will refresh its contents in %s seconds.",
+    "lootr.message.refresh_start": "The container will refresh with new contents in %s seconds!",
+    "lootr.message.refreshed": "The contents of the container are refreshed at your touch!",
+    "lootr.message.should_sneak": "Breaking the chest will delete your unique loot and all items in the chest! In order to break, you must sneak while doing so.",
+    "lootr.message.should_sneak2": "As loot is %s, only break if really needed.",
+    "lootr.message.should_sneak3": "per-player per-chest"
+}

@@ -1,0 +1,14 @@
+{
+    "pack": {
+        "pack_format": 1,
+        "description": "Lootr Polymer"
+    },
+    "filter": {
+        "block": [
+            {
+                "namespace": "^lootr$",
+                "path": "advancement/.*"
+            }
+        ]
+    }
+}

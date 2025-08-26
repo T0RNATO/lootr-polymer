@@ -1,0 +1,27 @@
+{
+    "schemaVersion": 1,
+    "id": "lootr_polymer",
+    "version": "${version}",
+    "name": "LootrPolymer",
+    "description": "",
+    "authors": [],
+    "contact": {},
+    "license": "MIT",
+    "icon": "./icon.png",
+    "environment": "server",
+    "entrypoints": {
+        "main": [
+            "tornato.lootr.LootrPolymer"
+        ]
+    },
+    "mixins": [
+        "lootrPolymer.mixins.json"
+    ],
+    "depends": {
+        "fabricloader": ">=${loader_version}",
+        "fabric": "*",
+        "minecraft": "*",
+        "polymer": "*",
+        "lootr": "*"
+    }
+}
