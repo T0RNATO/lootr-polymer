@@ -5,11 +5,15 @@
     "compatibilityLevel": "JAVA_21",
     "mixins": [
         "LootrAPIImplMixin",
+        "ModAdvancementsMixin",
         "ModBlockEntitiesMixin",
         "ModBlocksMixin",
         "ModEntitiesMixin",
         "ModItemsMixin",
-        "ModStatsMixin"
+        "ModLootMixin",
+        "ModParticlesMixin",
+        "ModStatsMixin",
+        "ModTabsMixin"
     ],
     "client": [
     ],

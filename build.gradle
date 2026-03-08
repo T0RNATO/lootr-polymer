@@ -42,7 +42,7 @@ dependencies {
     modImplementation include("eu.pb4:polymer-core:${project.polymer_version}")
     modImplementation include("xyz.nucleoid:server-translations-api:2.5.2+1.21.9-pre3")
     modImplementation include("eu.pb4:polymer-virtual-entity:${project.polymer_version}")
-    modImplementation "maven.modrinth:lootr:NKsNpTwe"
+    modImplementation "maven.modrinth:lootr:YGHOIQfA"
 }
 
 processResources {
@@ -107,6 +107,7 @@ publishing {
 
 loom {
     mixin {
+        useLegacyMixinAp = true
         defaultRefmapName = "LootrPolymer-refmap.json"
     }
 }
