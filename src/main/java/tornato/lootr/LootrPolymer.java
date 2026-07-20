@@ -30,5 +30,6 @@ public class LootrPolymer implements ModInitializer {
     public void onInitialize() {
         FabricLoader.getInstance().getModContainer(ID).ifPresent(modContainer ->
                 ResourceLoader.registerBuiltinPack(id("lootr_polymer"), modContainer, Text.of("Lootr Polymer"), PackActivationType.ALWAYS_ENABLED));
+        ConfigManager.loadConfig();
     }
 }

@@ -5,7 +5,6 @@ import eu.pb4.polymer.virtualentity.api.ElementHolder;
 import eu.pb4.polymer.virtualentity.api.elements.BlockDisplayElement;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalBlockTags;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -15,7 +14,9 @@ import org.joml.Vector3f;
 public class LootrInventoryRenderer implements BlockWithElementHolder {
     @Override
     public @Nullable ElementHolder createElementHolder(ServerWorld world, BlockPos pos, BlockState initialBlockState) {
-        var state = Blocks.LODESTONE.getDefaultState();
+        if (!ConfigManager.config.enabled()) return null;
+
+        var state = ConfigManager.config.block().value().getDefaultState();
         float depth = (initialBlockState.isIn(ConventionalBlockTags.CHESTS) ? 14/16f : 1f) + 1/24f;
 
         float scale = 0.2f;
