@@ -5,21 +5,21 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.JsonOps;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 
 import java.io.FileReader;
 import java.io.FileWriter;
 
 public class ConfigManager {
-    public record Config(boolean enabled, RegistryEntry<Block> block) {}
+    public record Config(boolean enabled, Holder<Block> block) {}
     public static final Config config;
 
     private static final Codec<Config> codec = RecordCodecBuilder.create(instance -> instance.group(
             Codec.BOOL.fieldOf("lootr_indicator").forGetter(Config::enabled),
-            Registries.BLOCK.getEntryCodec().fieldOf("lootr_indicator_block").forGetter(Config::block)
+            BuiltInRegistries.BLOCK.holderByNameCodec().fieldOf("lootr_indicator_block").forGetter(Config::block)
     ).apply(instance, Config::new));
 
     interface ThrowingSupplier<T> {
@@ -49,7 +49,7 @@ public class ConfigManager {
             }
 
             // if the config file doesn't exist, or has errors, create a default config
-            Config conf = new Config(true, Blocks.LODESTONE.getRegistryEntry());
+            Config conf = new Config(true, Blocks.LODESTONE.builtInRegistryHolder());
 
             unchecked(() -> {
                 var writer = new FileWriter(configFile);

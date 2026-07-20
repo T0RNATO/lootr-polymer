@@ -3,7 +3,7 @@
     "id": "lootr_polymer",
     "version": "${version}",
     "name": "LootrPolymer",
-    "description": "",
+    "description": "Server-side support for Lootr with Polymer",
     "authors": [],
     "contact": {},
     "license": "MIT",
@@ -19,8 +19,8 @@
     ],
     "depends": {
         "fabricloader": ">=${loader_version}",
-        "fabric": "*",
-        "minecraft": "*",
+        "fabric-api": "*",
+        "minecraft": ">=26.1",
         "lootr": "*"
     }
 }

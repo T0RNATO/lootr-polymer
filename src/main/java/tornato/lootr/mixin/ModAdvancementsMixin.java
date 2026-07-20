@@ -1,7 +1,6 @@
 package tornato.lootr.mixin;
 
-import eu.pb4.polymer.rsm.api.RegistrySyncUtils;
-import net.minecraft.registry.Registries;
+import net.minecraft.resources.Identifier;
 import noobanidus.mods.lootr.fabric.init.ModAdvancements;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -9,10 +8,9 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 
 @Mixin(ModAdvancements.class)
 public class ModAdvancementsMixin {
-    @ModifyArg(method = "registerAdvancements", at = @At(value = "INVOKE", target = "Lnet/minecraft/registry/Registry;register(Lnet/minecraft/registry/Registry;Lnet/minecraft/util/Identifier;Ljava/lang/Object;)Ljava/lang/Object;"), index = 2)
-    private static Object markServerOnly(Object entry) {
-        //noinspection unchecked,rawtypes
-        RegistrySyncUtils.setServerEntry((net.minecraft.registry.Registry) Registries.CRITERION, entry);
-        return entry;
+    @ModifyArg(method = "registerAdvancements", at = @At(value = "INVOKE", target = "Lnet/minecraft/core/Registry;register(Lnet/minecraft/core/Registry;Lnet/minecraft/resources/Identifier;Ljava/lang/Object;)Ljava/lang/Object;"), index = 1)
+    private static Identifier markServerOnly(Identifier location) {
+//        RegistrySyncUtils.setServerEntry(BuiltInRegistries.TRIGGER_TYPES, location);
+        return location;
     }
 }

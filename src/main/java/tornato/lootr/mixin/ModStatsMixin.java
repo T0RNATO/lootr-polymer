@@ -11,7 +11,5 @@ public class ModStatsMixin {
      * @reason Cancelling registration of statistic. Needless bloat and idk how to make the client ignore it.
      */
     @Overwrite(remap = false)
-    public static void registerStats() {
-
-    }
+    public static void registerStats() {}
 }
