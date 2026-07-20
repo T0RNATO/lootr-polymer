@@ -6,7 +6,6 @@
     "mixins": [
         "LootrAPIImplMixin",
         "LootrInitMixin",
-        "ModAdvancementsMixin",
         "ModBlockEntitiesMixin",
         "ModBlocksMixin",
         "ModEntitiesMixin",

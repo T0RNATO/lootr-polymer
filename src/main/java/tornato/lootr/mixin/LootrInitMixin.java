@@ -18,7 +18,7 @@ public class LootrInitMixin {
         RegistrySyncUtils.setServerEntry(BuiltInRegistries.CREATIVE_MODE_TAB, ModTabs.LOOTR_TAB);
         RegistrySyncUtils.setServerEntry(BuiltInRegistries.LOOT_CONDITION_TYPE, LootrAPI.rl("loot_count"));
 
-        RegistrySyncUtils.setServerEntry(BuiltInRegistries.PARTICLE_TYPE, LootrConstants.UNOPENED_PARTICLE);
-        RegistrySyncUtils.setServerEntry(BuiltInRegistries.PARTICLE_TYPE, LootrConstants.REFRESH_PARTICLE);
+        RegistrySyncUtils.setServerEntry(BuiltInRegistries.PARTICLE_TYPE, LootrConstants.Identifiers.UNOPENED_PARTICLE);
+        RegistrySyncUtils.setServerEntry(BuiltInRegistries.PARTICLE_TYPE, LootrConstants.Identifiers.REFRESH_PARTICLE);
     }
 }

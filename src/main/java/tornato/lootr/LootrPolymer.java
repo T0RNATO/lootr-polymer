@@ -27,10 +27,10 @@ public class LootrPolymer implements ModInitializer {
             Map.entry(ModBlocks.SHULKER_BOX, Blocks.SHULKER_BOX),
             Map.entry(ModBlocks.DECORATED_POT, Blocks.DECORATED_POT),
 
-            Map.entry(ModBlocks.COPPER_CHEST, Blocks.COPPER_CHEST),
-            Map.entry(ModBlocks.EXPOSED_COPPER_CHEST, Blocks.EXPOSED_COPPER_CHEST),
-            Map.entry(ModBlocks.WEATHERED_COPPER_CHEST, Blocks.WEATHERED_COPPER_CHEST),
-            Map.entry(ModBlocks.OXIDIZED_COPPER_CHEST, Blocks.OXIDIZED_COPPER_CHEST),
+            Map.entry(ModBlocks.COPPER_CHEST, Blocks.COPPER_CHEST.weathering().unaffected()),
+            Map.entry(ModBlocks.EXPOSED_COPPER_CHEST, Blocks.COPPER_CHEST.weathering().exposed()),
+            Map.entry(ModBlocks.WEATHERED_COPPER_CHEST, Blocks.COPPER_CHEST.weathering().weathered()),
+            Map.entry(ModBlocks.OXIDIZED_COPPER_CHEST, Blocks.COPPER_CHEST.weathering().oxidized()),
 
             Map.entry(ModBlocks.SUSPICIOUS_GRAVEL, Blocks.SUSPICIOUS_GRAVEL),
             Map.entry(ModBlocks.SUSPICIOUS_SAND, Blocks.SUSPICIOUS_SAND)
