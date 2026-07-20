@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(DefaultLootrAPIImpl.class)
 public class LootrAPIImplMixin {
-    @ModifyExpressionValue(method = "handleProviderOpen", at = @At(value = "INVOKE", target = "Lnoobanidus/mods/lootr/common/api/data/ILootrInfoProvider;hasOpened(Lnet/minecraft/entity/player/PlayerEntity;)Z"))
+    @ModifyExpressionValue(method = "handleProviderOpen(Lnoobanidus/mods/lootr/common/api/data/ILootrInfoProvider;Lnet/minecraft/server/network/ServerPlayerEntity;Lnoobanidus/mods/lootr/common/api/MenuBuilder;)V", at = @At(value = "INVOKE", target = "Lnoobanidus/mods/lootr/common/api/data/ILootrInfoProvider;hasServerOpened(Lnet/minecraft/entity/player/PlayerEntity;)Z"))
     private boolean disableStatUpdates(boolean original) {
         return true;
     }
