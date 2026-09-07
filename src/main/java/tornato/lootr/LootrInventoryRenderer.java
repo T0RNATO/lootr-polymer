@@ -7,6 +7,7 @@ import net.fabricmc.fabric.api.tag.convention.v2.ConventionalBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.Brightness;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import noobanidus.mods.lootr.common.api.data.blockentity.ILootrBlockEntity;
@@ -46,24 +47,28 @@ public class LootrInventoryRenderer implements BlockWithElementHolder {
         old1.setScale(new Vector3f(scale, scale, depth));
         old1.setOffset(new Vec3(shortOffset, -0.4, longOffset));
         old1.setVisibilityPredicate(isOld);
+        old1.setBrightness(Brightness.FULL_BRIGHT);
 
         var old2 = new BlockDisplayElement();
         old2.setBlockState(oldState);
         old2.setScale(new Vector3f(depth, scale, scale));
         old2.setOffset(new Vec3(longOffset, -0.4, shortOffset));
         old2.setVisibilityPredicate(isOld);
+        old2.setBrightness(Brightness.FULL_BRIGHT);
 
         var new1 = new BlockDisplayElement();
         new1.setBlockState(newState);
         new1.setScale(old1.getScale());
         new1.setOffset(old1.getOffset());
         new1.setVisibilityPredicate(isNew);
+        new1.setBrightness(Brightness.FULL_BRIGHT);
 
         var new2 = new BlockDisplayElement();
         new2.setBlockState(newState);
         new2.setScale(old2.getScale());
         new2.setOffset(old2.getOffset());
         new2.setVisibilityPredicate(isNew);
+        new2.setBrightness(Brightness.FULL_BRIGHT);
 
         var holder = new LootrElementHolder();
         holder.addElement(old1);
