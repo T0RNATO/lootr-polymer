@@ -9,8 +9,7 @@
         "ModBlockEntitiesMixin",
         "ModBlocksMixin",
         "ModEntitiesMixin",
-        "ModItemsMixin",
-        "ModStatsMixin"
+        "ModItemsMixin"
     ],
     "client": [
     ],
