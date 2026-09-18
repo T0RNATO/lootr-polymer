@@ -14,12 +14,13 @@ import java.io.FileReader;
 import java.io.FileWriter;
 
 public class ConfigManager {
-    public record Config(boolean enabled, Holder<Block> block) {}
+    public record Config(boolean enabled, Holder<Block> oldBlock, Holder<Block> newBlock) {}
     public static final Config config;
 
     private static final Codec<Config> codec = RecordCodecBuilder.create(instance -> instance.group(
             Codec.BOOL.fieldOf("lootr_indicator").forGetter(Config::enabled),
-            BuiltInRegistries.BLOCK.holderByNameCodec().fieldOf("lootr_indicator_block").forGetter(Config::block)
+            BuiltInRegistries.BLOCK.holderByNameCodec().fieldOf("lootr_indicator_block_old").forGetter(Config::oldBlock),
+            BuiltInRegistries.BLOCK.holderByNameCodec().fieldOf("lootr_indicator_block_new").forGetter(Config::newBlock)
     ).apply(instance, Config::new));
 
     interface ThrowingSupplier<T> {
@@ -49,7 +50,7 @@ public class ConfigManager {
             }
 
             // if the config file doesn't exist, or has errors, create a default config
-            Config conf = new Config(true, Blocks.LODESTONE.builtInRegistryHolder());
+            Config conf = new Config(true, Blocks.LODESTONE.builtInRegistryHolder(), Blocks.GOLD_BLOCK.builtInRegistryHolder());
 
             unchecked(() -> {
                 var writer = new FileWriter(configFile);
