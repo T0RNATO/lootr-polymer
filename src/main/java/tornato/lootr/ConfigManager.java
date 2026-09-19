@@ -14,13 +14,13 @@ import java.io.FileReader;
 import java.io.FileWriter;
 
 public class ConfigManager {
-    public record Config(boolean enabled, Holder<Block> oldBlock, Holder<Block> newBlock) {}
+    public record Config(boolean enabled, Holder<Block> opened, Holder<Block> unopened) {}
     public static final Config config;
 
     private static final Codec<Config> codec = RecordCodecBuilder.create(instance -> instance.group(
             Codec.BOOL.fieldOf("lootr_indicator").forGetter(Config::enabled),
-            BuiltInRegistries.BLOCK.holderByNameCodec().fieldOf("lootr_indicator_block_old").forGetter(Config::oldBlock),
-            BuiltInRegistries.BLOCK.holderByNameCodec().fieldOf("lootr_indicator_block_new").forGetter(Config::newBlock)
+            BuiltInRegistries.BLOCK.holderByNameCodec().fieldOf("opened_indicator").forGetter(Config::opened),
+            BuiltInRegistries.BLOCK.holderByNameCodec().fieldOf("unopened_indicator").forGetter(Config::unopened)
     ).apply(instance, Config::new));
 
     interface ThrowingSupplier<T> {

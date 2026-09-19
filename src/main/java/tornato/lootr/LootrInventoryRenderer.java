@@ -5,16 +5,16 @@ import eu.pb4.polymer.virtualentity.api.ElementHolder;
 import eu.pb4.polymer.virtualentity.api.elements.BlockDisplayElement;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalBlockTags;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.util.Brightness;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.Vec3;
 import noobanidus.mods.lootr.common.api.data.blockentity.ILootrBlockEntity;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
 
 import java.util.function.Predicate;
+import java.util.stream.IntStream;
 
 public class LootrInventoryRenderer implements BlockWithElementHolder {
     @Override
@@ -22,59 +22,42 @@ public class LootrInventoryRenderer implements BlockWithElementHolder {
         return true;
     }
 
+    private void createDisplays(ElementHolder holder, float offset, Predicate<ServerPlayer> predicate, BlockState state) {
+        float scale = 0.2f;
+        float depth = 0.02f;
+
+        var a = new Vector3f(scale, scale, depth);
+        var b = new Vector3f(depth, scale, scale);
+
+        IntStream.range(0, 4).forEach(i -> {
+            var bd = new BlockDisplayElement();
+            bd.setBlockState(state);
+            bd.setVisibilityPredicate(predicate);
+            bd.setScale(i % 2 == 0 ? a : b);
+            var dir = Direction.from2DDataValue(i);
+            var dirVec = dir.getUnitVec3().scale(0.5 + depth/2 - offset);
+            // 0.0001 moves them out of the block so lighting works
+            var worldspaceAlignment = dir.getAxis().getPositive().getUnitVec3().scale(scale/2 - depth/2 + 0.0001);
+            bd.setOffset(dirVec.add(worldspaceAlignment).add(-scale/2, -0.4, -scale/2));
+            holder.addElement(bd);
+        });
+    }
+
     @Override
     public @Nullable ElementHolder createElementHolder(ServerLevel world, BlockPos pos, BlockState initialBlockState) {
         if (!ConfigManager.config.enabled()) return null;
 
-        var oldState = ConfigManager.config.oldBlock().value().defaultBlockState();
-        var newState = ConfigManager.config.newBlock().value().defaultBlockState();
-        float depth = (initialBlockState.is(ConventionalBlockTags.CHESTS) ? 14 / 16f : 1f) + 1 / 24f;
+        var openedState = ConfigManager.config.opened().value().defaultBlockState();
+        var unopenedState = ConfigManager.config.unopened().value().defaultBlockState();
 
-        float scale = 0.2f;
-        double shortOffset = -scale / 2;
-        double longOffset = -depth / 2;
+        float offset = initialBlockState.is(ConventionalBlockTags.CHESTS) ? 1/16f : 0;
 
-        Predicate<ServerPlayer> isNew = player -> {
-            if (world.getBlockEntity(pos) instanceof ILootrBlockEntity lootr) {
-                return !lootr.hasServerOpened(player);
-            }
-            return true;
-        };
-        Predicate<ServerPlayer> isOld = player -> !isNew.test(player);
-
-        var old1 = new BlockDisplayElement();
-        old1.setBlockState(oldState);
-        old1.setScale(new Vector3f(scale, scale, depth));
-        old1.setOffset(new Vec3(shortOffset, -0.4, longOffset));
-        old1.setVisibilityPredicate(isOld);
-        old1.setBrightness(Brightness.FULL_BRIGHT);
-
-        var old2 = new BlockDisplayElement();
-        old2.setBlockState(oldState);
-        old2.setScale(new Vector3f(depth, scale, scale));
-        old2.setOffset(new Vec3(longOffset, -0.4, shortOffset));
-        old2.setVisibilityPredicate(isOld);
-        old2.setBrightness(Brightness.FULL_BRIGHT);
-
-        var new1 = new BlockDisplayElement();
-        new1.setBlockState(newState);
-        new1.setScale(old1.getScale());
-        new1.setOffset(old1.getOffset());
-        new1.setVisibilityPredicate(isNew);
-        new1.setBrightness(Brightness.FULL_BRIGHT);
-
-        var new2 = new BlockDisplayElement();
-        new2.setBlockState(newState);
-        new2.setScale(old2.getScale());
-        new2.setOffset(old2.getOffset());
-        new2.setVisibilityPredicate(isNew);
-        new2.setBrightness(Brightness.FULL_BRIGHT);
+        Predicate<ServerPlayer> opened = player -> world.getBlockEntity(pos) instanceof ILootrBlockEntity lootr && lootr.hasServerOpened(player);
+        Predicate<ServerPlayer> unopened = player -> !opened.test(player);
 
         var holder = new LootrElementHolder();
-        holder.addElement(old1);
-        holder.addElement(old2);
-        holder.addElement(new1);
-        holder.addElement(new2);
+        createDisplays(holder, offset, opened, openedState);
+        createDisplays(holder, offset, unopened, unopenedState);
 
         return holder;
     }

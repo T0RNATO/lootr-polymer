@@ -6,6 +6,7 @@ import eu.pb4.polymer.virtualentity.impl.SafeBundler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import noobanidus.mods.lootr.common.api.data.blockentity.ILootrBlockEntity;
 
 import java.util.ArrayList;
@@ -19,13 +20,12 @@ public class LootrElementHolder extends ElementHolder {
     @Override
     protected void onTick() {
         super.onTick();
-        if (getAttachment() == null) {
-            return;
-        }
+        if (getAttachment() == null) return;
+
         ServerLevel world = getAttachment().getWorld();
-        if (!(world.getBlockEntity(BlockPos.containing(getAttachment().getPos())) instanceof ILootrBlockEntity lootr)) {
-            return;
-        }
+        BlockEntity be = world.getBlockEntity(BlockPos.containing(getAttachment().getPos()));
+        if (!(be instanceof ILootrBlockEntity)) return;
+
         getWatchingPlayers().forEach(listener -> {
             getElements().forEach(e -> {
                 if (e instanceof AbstractElement element) {
