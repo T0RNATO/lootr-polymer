@@ -4,7 +4,6 @@
     "package": "tornato.lootr.mixin",
     "compatibilityLevel": "JAVA_21",
     "mixins": [
-        "LootrAPIImplMixin",
         "LootrInitMixin",
         "ModBlockEntitiesMixin",
         "ModBlocksMixin",
